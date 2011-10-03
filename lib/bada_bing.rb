@@ -1,5 +1,11 @@
+$:.unshift(File.expand_path(File.dirname(__FILE__)))
+
+require "faraday"
+
 require "bada_bing/version"
 
 module BadaBing
-  # Your code goes here...
+  class << self
+    attr_accessor :application_id
+  end
 end
