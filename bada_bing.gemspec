@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Ezekiel Templin"]
   s.email       = ["ezkl@me.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Bing, but easier}
+  s.description = %q{Bada... bing.}
 
   s.rubyforge_project = "bada_bing"
 
@@ -20,5 +20,6 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency "yajl-ruby"
+  s.add_runtime_dependency "typhoeus"
 end
