@@ -3,12 +3,13 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in bada_bing.gemspec
 gemspec
 
-gem 'faraday'
+gem 'typhoeus'
+gem 'yajl-ruby'
 
 group :development, :test do
   gem 'rspec'
   gem 'vcr'
-  gem 'fakeweb'
+  gem 'webmock'
   
   gem 'guard'
   gem 'guard-rspec'
