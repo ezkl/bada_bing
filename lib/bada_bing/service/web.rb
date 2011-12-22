@@ -40,7 +40,6 @@ module BadaBing
         end
         
         @hydra.queue(request)
-        @hydra.run
       end
       
       def process_response(response)
