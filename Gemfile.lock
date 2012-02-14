@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bada_bing (0.0.1)
+    bada_bing (0.0.2)
       typhoeus
       yajl-ruby
 
