@@ -5,11 +5,8 @@ gemspec
 
 group :development, :test do
   gem 'rspec'
-  gem 'vcr'
-  gem 'webmock'
-  
+  gem 'vcr'  
   gem 'guard'
   gem 'guard-rspec'
-  gem 'growl_notify'
-  gem 'rb-appscript'
+  gem 'growl'
 end
