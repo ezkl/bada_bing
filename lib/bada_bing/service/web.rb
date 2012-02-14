@@ -15,36 +15,39 @@ module BadaBing
             
       def request
         request_max_offset
-        
-        while (@max_offset >= @current_offset)
-          request = Typhoeus::Request.new(request_uri(@current_offset))
+        if @max_offset > 0        
+          while (@max_offset >= @current_offset)
+            request = Typhoeus::Request.new(request_uri(@current_offset))
           
-          request.on_complete do |response|
-            process_response(response)
+            request.on_complete do |response|
+              process_response(response)
+            end
+          
+            @hydra.queue(request)
+          
+            @current_offset += 50
           end
-          
-          @hydra.queue(request)
-          
-          @current_offset += 50
-        end
         
-        @hydra.run
+          @hydra.run          
+        end
       end
 
       def request_max_offset
         request = Typhoeus::Request.new(request_uri(950))
+        @hydra.queue(request)
         
         request.on_complete do |response|
           body    = parse_json(response.body)
           @max_offset = parse_offset(body)
         end
         
-        @hydra.queue(request)
+        @hydra.run
       end
       
       def process_response(response)
         if response.success?
-          body    = parse_json(response.body)          
+          body    = parse_json(response.body)
+                   
           parse_results(body).each do |result|
             options = {}
             options[:title] = result.fetch("Title")
