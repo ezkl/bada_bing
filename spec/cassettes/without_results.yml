@@ -1,0 +1,24 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.bing.net/json.aspx?AppId=400B3E08453374F9186FD32D2699A313071D0233&Sources=Web&Web.Count=50&Web.Offset=950&Query=zibblezabblezee
+    body: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '107'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 14 Feb 2012 22:22:33 GMT
+      Connection:
+      - keep-alive
+    body: ! '{"SearchResponse":{"Version":"2.2","Query":{"SearchTerms":"zibblezabblezee"},"Web":{"Total":0,"Offset":0}}}'
+    http_version: '1.1'
+  recorded_at: Tue, 14 Feb 2012 22:22:33 GMT
+recorded_with: VCR 2.0.0.rc1
