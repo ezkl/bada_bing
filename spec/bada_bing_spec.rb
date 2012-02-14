@@ -10,18 +10,32 @@ describe BadaBing do
   end
   
   describe "#web_search" do
-    use_vcr_cassette
+    context "with results" do    
+      before(:all) do
+        VCR.use_cassette('with_results', :record => :new_episodes) do     
+          @request = BadaBing.web_search("test query")
+        end
+      end
     
-    before(:all) do            
-      @request = BadaBing.web_search("test query")
+      it "should take a query string" do
+        @request.query.should eq URI.encode "test query"
+      end
+    
+      it "should use max_offset to determine true offset" do
+        @request.max_offset.should be 400
+      end
     end
     
-    it "should take a query string" do
-      @request.query.should eq URI.encode "test query"
-    end
-    
-    it "should use max_offset to determine true offset" do
-      expect { @request.request_max_offset }.to change(@request, :max_offset).from(950).to(300)
+    context "without results" do
+      before(:all) do
+        VCR.use_cassette('without_results', :record => :new_episodes) do  
+          @request = BadaBing.web_search("zibblezabblezee")
+        end
+      end
+      
+      it "should return empty array if no results" do
+        @request.results.should eq []
+      end
     end
   end
 end
