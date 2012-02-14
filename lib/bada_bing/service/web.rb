@@ -33,19 +33,19 @@ module BadaBing
 
       def request_max_offset
         request = Typhoeus::Request.new(request_uri(950))
+        @hydra.queue(request)
         
         request.on_complete do |response|
           body    = parse_json(response.body)
           @max_offset = parse_offset(body)
-        end
-        
-        @hydra.queue(request)
+        end        
         @hydra.run
       end
       
       def process_response(response)
         if response.success?
-          body    = parse_json(response.body)          
+          body    = parse_json(response.body)
+                   
           parse_results(body).each do |result|
             options = {}
             options[:title] = result.fetch("Title")
@@ -55,6 +55,10 @@ module BadaBing
         else
           puts "Failure!"
         end
+      end
+      
+      def parse_limit(body)
+        
       end
       
       def parse_offset(body)
